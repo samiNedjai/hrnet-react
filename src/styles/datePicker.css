@@ -1,0 +1,15 @@
+.react-datepicker__today-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Espacement entre le texte et l'icône */
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.react-datepicker__today-button::before {
+    content: "\f015"; /* Code de l'icône FontAwesome Home */
+    font-family: "Font Awesome 5 Free"; /* Nécessaire pour FontAwesome */
+    font-weight: 900; /* Requis pour les icônes solid */
+    margin-right: 5px; /* Espacement entre l'icône et le texte */
+}

@@ -1,15 +1,13 @@
 
 
 import './App.css'
+import CreateEmployee from './pages/CreateEmployee'
 
 function App() {
 
   return (
   
-      
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <CreateEmployee/>
     
   )
 }
