@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import {states, departments} from "../data/data";
 import CustomDropdown from "../components/Dropdown";
+import { useDispatch } from "react-redux";
+import { addEmployeeAction } from "../actions/employeeAction"
 import "../styles/createEmployee.css"
 
 
@@ -19,11 +21,52 @@ export default function CreateEmployee() {
   const [state, setState] = useState(null);;
   const [zipCode, setZipCode] = useState("");
   const [department, setDepartment] = useState(null);
+  const dispatch = useDispatch();
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(
+      !firstName ||
+      !lastName ||
+      !dateOfBirth ||
+      !startDate ||
+      !street ||
+      !city ||
+      !state ||
+      !zipCode ||
+      !department
+    ) {
+      alert("Please fill all fields");
+      return
+    }
+    dispatch(
+      addEmployeeAction({
+        firstName,
+        lastName,
+        dateOfBirth: dateOfBirth.toISOString(), // Convertir en chaîne de caractères
+        startDate: startDate.toISOString(),     // Convertir en chaîne de caractères
+        address: { street, city, state: state.value, zipCode },
+        department: department.value
+      }) 
+    );
+    alert("Employee Created!");
+    // Reset form fields
+    setFirstName("");
+    setLastName("");
+    setDateOfBirth(null);
+    setStartDate(null);
+    setStreet("");
+    setCity("");
+    setState(null);
+    setZipCode("");
+    setDepartment(null);
+  }
   
     return (
         <div className="container">
           <h2>Create Employee</h2>
-          <form >
+          <form onSubmit={handleSubmit}>
             <label>First Name:</label>
             <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
     
