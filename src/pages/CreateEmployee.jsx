@@ -1,4 +1,5 @@
 import  { useState } from "react";
+import { Link } from "react-router-dom";
 import CustomDatePicker from "../components/DatePicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -66,6 +67,7 @@ export default function CreateEmployee() {
     return (
         <div className="container">
           <h2>Create Employee</h2>
+          <Link to="/employee-list">View Current Employees</Link>
           <form onSubmit={handleSubmit}>
             <label>First Name:</label>
             <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
