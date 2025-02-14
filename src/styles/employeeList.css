@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.entries-select label {
+    margin-right: 10px;
+  }
+  
+  .entries-select select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+.search-box {
+    display: flex;
+    justify-content: center;
+  }
+  .search-box label {
+    margin-right: 5px;
+  }
+  
+  .search-box input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+  }
