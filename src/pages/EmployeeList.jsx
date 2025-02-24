@@ -5,6 +5,7 @@ import {
   useReactTable,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 import DataTable from "../components/DataTable";
 import "../styles/employeeList.css";
@@ -43,6 +44,7 @@ export default function EmployeeList() {
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
   });
 
   return (
@@ -80,6 +82,46 @@ export default function EmployeeList() {
       </div>
 
       <DataTable table={table} />
+      <div  className="pagination-container">
+        <span className="entries-info">
+        Showing {table.getRowModel().rows.length > 0
+            ? `${table.getState().pagination.pageIndex * pageSize + 1} to ${
+                Math.min(
+                  (table.getState().pagination.pageIndex + 1) * pageSize,
+                  employees.length
+                )
+              } of ${employees.length}`
+            : "0"} entries
+        </span>
+        <div className="pagination">
+          <button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+            className="pagination-button"
+          >
+            Previous
+          </button>
+          {Array.from({ length: table.getPageCount() }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => table.setPageIndex(i)}
+              className={`pagination-number ${
+                table.getState().pagination.pageIndex === i ? "active" : ""
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+            className="pagination-button"
+          >
+            Next
+          </button>
+        </div>
+
+      </div>
       <Link to="/">Home</Link>
     </div>
   );
