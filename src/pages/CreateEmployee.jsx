@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import { Link } from "react-router-dom";
 import CustomDatePicker from "../components/DatePicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,7 @@ import CustomDropdown from "../components/Dropdown";
 import { useDispatch } from "react-redux";
 import { addEmployeeAction } from "../actions/employeeAction";
 import Modal from "samodal-react";
+import Logo from "../assets/logo2.jpg"
 import "../styles/createEmployee.css";
 
 export default function CreateEmployee() {
@@ -23,12 +24,17 @@ export default function CreateEmployee() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
+  // Gestion des erreurs avec useActionState
+  const [formError, setFormError] = useActionState((prevError, action) => action ?? "", "");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!firstName || !lastName || !dateOfBirth || !startDate || !street || !city || !state || !zipCode || !department) {
-      alert("Please fill all fields");
+      setFormError("Please fill all fields");
       return;
     }
+     // Réinitialiser le message d'erreur
+     setFormError("");
     dispatch(
       addEmployeeAction({
         firstName,
@@ -54,9 +60,20 @@ export default function CreateEmployee() {
 
   return (
     <div className="container">
+      <header  className="header_create">
+      <img src={Logo} alt="" />
+      <div>
+      <h1>HRnet</h1>
       <h2>Create Employee</h2>
-      <Link to="/employee-list">View Current Employees</Link>
-      <form onSubmit={handleSubmit}>
+      </div>
+      
+      <Link to="/employee-list" className="link-button">View Current Employees</Link>
+      
+      </header>
+      {formError && <p className="error-message">{formError}</p>}
+      <form onSubmit={handleSubmit} >
+        <fieldset>
+        <legend>Address</legend>
         <label>First Name:</label>
         <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
 
@@ -64,11 +81,13 @@ export default function CreateEmployee() {
         <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
 
         <label>Date of Birth:</label>
+        
         <CustomDatePicker selectedDate={dateOfBirth} onChange={setDateOfBirth} todayButton={<FontAwesomeIcon icon={faHome} />} />
-
+       
         <label>Start Date:</label>
         <CustomDatePicker selectedDate={startDate} onChange={setStartDate} todayButton={<FontAwesomeIcon icon={faHome} />} />
-
+        <button type="submit">Save</button>
+        </fieldset>
         <fieldset>
           <legend>Address</legend>
           <label>Street:</label>
@@ -86,13 +105,12 @@ export default function CreateEmployee() {
 
           <label>Zip Code:</label>
           <input type="text" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
-        </fieldset>
-
-        <label>Department:</label>
+          <label>Department:</label>
         <CustomDropdown options={departments} selectedOption={department} onChange={setDepartment} />
-
-        <button type="submit">Save</button>
+        </fieldset>
+      
       </form>
+     
       
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Success">
         <p>Employee Created!</p>

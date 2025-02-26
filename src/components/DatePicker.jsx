@@ -5,6 +5,7 @@ import "../styles/datePicker.css"
 
 export default function CustomDatePicker({ selectedDate, onChange }) {
   return (
+    <div className="custom-datepicker">
     <DatePicker
       selected={selectedDate}
       onChange={onChange}
@@ -14,5 +15,6 @@ export default function CustomDatePicker({ selectedDate, onChange }) {
       dropdownMode="select"  // Affiche des menus déroulants pour mois et année
       todayButton="Today"  // Ajoute un bouton pour revenir à la date actuelle
     />
+    </div>
   )
 }

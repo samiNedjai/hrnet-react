@@ -1,3 +1,6 @@
+.custom-datepicker {
+    width: 50%; /* Ajuste cette valeur selon tes besoins */
+  }
 .react-datepicker__today-button {
     display: flex;
     justify-content: center;
