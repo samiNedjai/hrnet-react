@@ -1,0 +1,19 @@
+.custom-dropdown {
+    width: 50%; 
+  }
+  
+  .custom-dropdown .react-select__control {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  .custom-dropdown.react-select-container {
+    margin-bottom: 15px;
+  }
+
+  .custom-dropdown .react-select__control--is-focused {
+    border-color: rgb(108, 131, 18);;
+    box-shadow: 0 0 5px rgba(108, 131, 18, 0.5);
+  }
+  

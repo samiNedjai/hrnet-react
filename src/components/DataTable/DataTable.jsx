@@ -1,6 +1,6 @@
 import React from 'react'
 import { flexRender } from "@tanstack/react-table";
-import "../styles/dataTable.css"
+import "../DataTable/dataTable.css"
 
 
 

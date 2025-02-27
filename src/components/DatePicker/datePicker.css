@@ -1,0 +1,26 @@
+.custom-datepicker {
+  width: 100%; /* Ajuste cette valeur selon tes besoins */
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
+.react-datepicker__today-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; 
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.react-datepicker__today-button::before {
+  content: "\f015"; /* Code de l'icône FontAwesome Home */
+  font-family: "Font Awesome 5 Free"; /* Nécessaire pour FontAwesome */
+  font-weight: 900; /* Requis pour les icônes solid */
+  margin-right: 5px; /* Espacement entre l'icône et le texte */
+}
+.react-datepicker__input-container input:focus {
+  border-color: #6c8312;
+  outline: none;
+  box-shadow: 0 0 5px rgba(108, 131, 18, 0.5);
+}

@@ -1,6 +1,6 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "../styles/datePicker.css"
+import "../DatePicker/datePicker.css"
 
 
 export default function CustomDatePicker({ selectedDate, onChange }) {

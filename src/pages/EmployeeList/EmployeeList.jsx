@@ -7,8 +7,8 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
 } from "@tanstack/react-table";
-import DataTable from "../components/DataTable";
-import "../styles/employeeList.css";
+import DataTable from "../../components/DataTable/DataTable";
+import "../EmployeeList/employeeList.css";
 
 export default function EmployeeList() {
   // Récupérer les employés depuis le store Redux

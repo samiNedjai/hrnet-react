@@ -1,6 +1,6 @@
 
 import Select from "react-select";
-import "../styles/dropdown.css"
+import "../Dropdown/dropdown.css"
 
 export default function CustomDropdown({ options, selectedOption, onChange }) {
     

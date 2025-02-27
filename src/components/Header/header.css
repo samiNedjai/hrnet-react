@@ -1,0 +1,34 @@
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #444;
+    font-size: 40px;
+  }
+  img {
+    margin-left: 90px;
+    width: 180px;
+  height: auto;
+  }
+  .link-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #7a9520; 
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    height: 35px;
+    margin-top: 50px;
+  }
+  
+  .link-button:hover {
+    background-color: #54600e; 
+    transform: scale(1.05); 
+  }
+  
+  .link-button:active {
+    transform: scale(0.98); 
+  }
+  
