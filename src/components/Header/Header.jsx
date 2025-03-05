@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import Logo from "../../assets/logo2.jpg";
+const Logo = "/logo.webp";
 import "../Header/header.css";
 
 export default function Header() {
+ 
   return (
     <header className="header_create">
-      <img src={Logo} alt="HRnet Logo" />
+      <img src={Logo} alt="HRnet Logo" loading="lazy" />
       <div>
         <h1>HRnet</h1>
         <h2>Create Employee</h2>

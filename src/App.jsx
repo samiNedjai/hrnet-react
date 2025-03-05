@@ -1,17 +1,20 @@
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import CreateEmployee from './pages/CreactEmployee/CreateEmployee';
-import EmployeeList from './pages/EmployeeList/EmployeeList'
+const EmployeeList = lazy(() => import("./pages/EmployeeList/EmployeeList"));
+const CreateEmployee = lazy(() => import("./pages/CreactEmployee/CreateEmployee"));
 import './App.css'
 
 
 function App() {
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<CreateEmployee />} />
-        <Route path="/employee-list" element= {<EmployeeList/>}/>
-      </Routes>
+    <Router> 
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<CreateEmployee />} />
+          <Route path="/employee-list" element={<EmployeeList />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }
