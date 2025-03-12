@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import Table from "smtable-react"; 
 import "../EmployeeList/employeeList.css";
+import Header from "../../components/Header/Header";
 
 export default function EmployeeList() {
   // Récupérer les employés depuis le store Redux
@@ -31,17 +31,17 @@ export default function EmployeeList() {
   }));
   return (
     <div>
-      <h2>Current Employees</h2>
-
-      <Table 
+      <Header/>
+     
+      <div className="table-wrapper">
+      <Table
         columns={columns} 
         data={formattedEmployees} 
         pageSizeOptions={[5, 10, 20, 50]} 
         emptyMessage="No employees found."
 
       />
-
-      <Link to="/">Home</Link>
+      </div>
     </div>
   );
 }

@@ -100,7 +100,7 @@ export default function EmployeeForm({
           <label>State:</label>
           <CustomDropdown
             options={states.map((state) => ({
-              value: state.name,
+              value: state.abbreviation,
               label: state.name,
             }))}
             selectedOption={state}
