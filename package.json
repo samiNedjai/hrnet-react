@@ -22,7 +22,8 @@
     "react-router-dom": "^7.1.5",
     "react-select": "^5.10.0",
     "redux": "^5.0.1",
-    "samodal-react": "^1.0.3"
+    "samodal-react": "^1.0.3",
+    "smtable-react": "^1.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

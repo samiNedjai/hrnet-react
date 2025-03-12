@@ -1,127 +1,46 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  useReactTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-} from "@tanstack/react-table";
-import DataTable from "../../components/DataTable/DataTable";
+import Table from "smtable-react"; 
 import "../EmployeeList/employeeList.css";
 
 export default function EmployeeList() {
   // Récupérer les employés depuis le store Redux
   const employees = useSelector((state) => state.employee.employees);
 
-  // Colonnes pour le tableau de données
-  const columns = React.useMemo(
-    () => [
-      { id: "firstName", accessorKey: "firstName", header: "First Name" },
-      { id: "lastName", accessorKey: "lastName", header: "Last Name" },
-      { id: "startDate", accessorKey: "startDate", header: "Start Date" },
-      { id: "department", accessorKey: "department", header: "Department" },
-      {
-        id: "dateOfBirth",
-        accessorKey: "dateOfBirth",
-        header: "Date of Birth",
-      },
-      { id: "street", accessorKey: "address.street", header: "Street" },
-      { id: "city", accessorKey: "address.city", header: "City" },
-      { id: "state", accessorKey: "address.state", header: "State" },
-      { id: "zipCode", accessorKey: "address.zipCode", header: "Zip Code" },
-    ],
-    []
-  );
-
-  const [globalFilter, setGlobalFilter] = useState("");
-  const [pageSize, setPageSize] = useState(10);
-
-  const table = useReactTable({
-    data: employees,
-    columns,
-    state: { globalFilter },
-    getCoreRowModel: getCoreRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel()
-  });
-
+  // Définition des colonnes du tableau
+  const columns = [
+    { id: "firstName", label: "First Name" },
+    { id: "lastName", label: "Last Name" },
+    { id: "startDate", label: "Start Date" },
+    { id: "department", label: "Department" },
+    { id: "dateOfBirth", label: "Date of Birth" },
+    { id: "street", label: "Street" },
+    { id: "city", label: "City" },
+    { id: "state", label: "State" },
+    { id: "zipCode", label: "Zip Code" },
+  ];
+  const formatDate = (isoString) => {
+    if (!isoString) return ""; 
+    return new Date(isoString).toISOString().split("T")[0];  // Retourne YYYY-MM-DD
+  };
+  const formattedEmployees = employees.map(employee => ({
+    ...employee,
+    dateOfBirth: formatDate(employee.dateOfBirth),
+    startDate: formatDate(employee.startDate),
+  }));
   return (
     <div>
       <h2>Current Employees</h2>
-      <div className="header">
-        <div className="entries-select">
-          <label>
-            Show{" "}
-            <select
-              value={pageSize}
-              onChange={(e) => {
-                setPageSize(Number(e.target.value));
-                table.setPageSize(Number(e.target.value));
-              }}
-            >
-              {[5, 10, 20, 50].map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>{" "}
-            entries
-          </label>
-        </div>
-        <div className="search-box">
-          <label htmlFor="search">Search:</label>
-          <input
-            id="search"
-            value={globalFilter}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-            placeholder="Search employees..."
-          />
-        </div>
-      </div>
 
-      <DataTable table={table} />
-      <div  className="pagination-container">
-        <span className="entries-info">
-        Showing {table.getRowModel().rows.length > 0
-            ? `${table.getState().pagination.pageIndex * pageSize + 1} to ${
-                Math.min(
-                  (table.getState().pagination.pageIndex + 1) * pageSize,
-                  employees.length
-                )
-              } of ${employees.length}`
-            : "0"} entries
-        </span>
-        <div className="pagination">
-          <button
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-            className="pagination-button"
-          >
-            Previous
-          </button>
-          {Array.from({ length: table.getPageCount() }, (_, i) => (
-            <button
-              key={i}
-              onClick={() => table.setPageIndex(i)}
-              className={`pagination-number ${
-                table.getState().pagination.pageIndex === i ? "active" : ""
-              }`}
-            >
-              {i + 1}
-            </button>
-          ))}
-          <button
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-            className="pagination-button"
-          >
-            Next
-          </button>
-        </div>
+      <Table 
+        columns={columns} 
+        data={formattedEmployees} 
+        pageSizeOptions={[5, 10, 20, 50]} 
+        emptyMessage="No employees found."
 
-      </div>
+      />
+
       <Link to="/">Home</Link>
     </div>
   );
