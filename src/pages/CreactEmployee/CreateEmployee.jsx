@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { addEmployeeAction } from "../../actions/employeeAction";
@@ -6,6 +6,13 @@ import Modal from "samodal-react";
 import Header from "../../components/Header/Header";
 import EmployeeForm from "../../components/EmployeeForm/EmployeeForm";
 import "../CreactEmployee/createEmployee.css";
+
+/**
+ * Page de création d'un employé.
+ *
+ * @component
+ * @returns {JSX.Element} Le formulaire de création d'un employé avec une modale de confirmation.
+ */
 
 export default function CreateEmployee() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,9 +31,12 @@ export default function CreateEmployee() {
   const [zipCode, setZipCode] = useState("");
   const [department, setDepartment] = useState(null);
 
+  /**
+   * Gère la soumission du formulaire d'ajout d'un employé.
+   */
   const handleSubmit = () => {
     console.log("Received data in CreateEmployee.jsx:");
-
+    // Vérification des champs obligatoires
     if (
       !firstName ||
       !lastName ||
@@ -44,6 +54,7 @@ export default function CreateEmployee() {
     }
 
     setFormError("");
+    // Dispatch de l'action Redux pour ajouter l'employé
     dispatch(
       addEmployeeAction({
         firstName,
@@ -103,8 +114,7 @@ export default function CreateEmployee() {
         department={department}
         setDepartment={setDepartment}
         onSubmit={handleSubmit}
-        onCancel={handleCancel} 
-
+        onCancel={handleCancel}
         formError={formError}
       />
 
