@@ -103,7 +103,7 @@ Ce projet est sous licence **MIT**.
 ---
 
 ## 👨‍💻 Auteur
-Développé avec ❤️ par **Sami Nedjai**.
+Développé  par **Sami Nedjai**.
 
 💎 Contact : [sami.nedjai@outlook.fr](mailto:sami.nedjai@outlook.fr)  
 💻 GitHub : [@samiNedjai](https://github.com/samiNedjai)
